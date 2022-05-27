@@ -1,6 +1,7 @@
 package db
 
 import (
+	"database/sql"
 	"github.com/gin-gonic/gin"
 	"net/http"
 )
@@ -60,4 +61,30 @@ func (server *Server) listDistrictTambon(ctx *gin.Context) {
 	}
 
 	ctx.JSON(http.StatusOK, districts)
+}
+
+type ListTambonPostcodeRequest struct {
+	ID int32 `uri:"id" binding:"required,min=100101,max=961303"`
+}
+
+func (server *Server) listTambonPostcode(ctx *gin.Context) {
+	req := ListTambonPostcodeRequest{}
+	if err := ctx.ShouldBindUri(&req); err != nil {
+		ctx.JSON(http.StatusBadRequest, errorResponse(err))
+		return
+	}
+
+	postcode, err := server.store.ListTambonPostcode(ctx, req.ID)
+
+	if err != nil {
+		if err == sql.ErrNoRows {
+			ctx.JSON(http.StatusNotFound, errorResponse(err))
+			return
+		}
+		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
+		return
+	}
+
+	ctx.JSON(http.StatusOK, postcode)
+
 }

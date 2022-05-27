@@ -38,12 +38,9 @@ CREATE TABLE "tambon"
 
 CREATE TABLE "postcode"
 (
-    "code"        int NOT NULL,
-    "tambon_id"   int NOT NULL,
-    "district_id" int NOT NULL,
-    "province_id" int NOT NULL,
-    "region_id"   int NOT NULL,
-    PRIMARY KEY ("code", "tambon_id")
+    "postcode"  int NOT NULL,
+    "tambon_id" int NOT NULL,
+    PRIMARY KEY ("postcode", "tambon_id")
 );
 
 ALTER TABLE "province"
@@ -66,12 +63,3 @@ ALTER TABLE "tambon"
 
 ALTER TABLE "postcode"
     ADD FOREIGN KEY ("tambon_id") REFERENCES "tambon" ("tambon_id");
-
-ALTER TABLE "postcode"
-    ADD FOREIGN KEY ("district_id") REFERENCES "district" ("district_id");
-
-ALTER TABLE "postcode"
-    ADD FOREIGN KEY ("province_id") REFERENCES "province" ("province_id");
-
-ALTER TABLE "postcode"
-    ADD FOREIGN KEY ("region_id") REFERENCES "region" ("region_id");

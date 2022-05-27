@@ -28,6 +28,7 @@ func NewServer(store *db.Store) *Server {
 	router.GET("/province", server.listProvinces)
 	router.GET("/district/:id", server.listProvinceDistricts)
 	router.GET("/tambon/:id", server.listDistrictTambon)
+	router.GET("/postcode/:id", server.listTambonPostcode)
 
 	server.router = router
 	return server

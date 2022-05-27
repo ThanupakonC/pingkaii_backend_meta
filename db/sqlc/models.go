@@ -19,11 +19,8 @@ type District struct {
 }
 
 type Postcode struct {
-	Code       int32 `json:"code"`
-	TambonID   int32 `json:"tambon_id"`
-	DistrictID int32 `json:"district_id"`
-	ProvinceID int32 `json:"province_id"`
-	RegionID   int32 `json:"region_id"`
+	Postcode int32 `json:"postcode"`
+	TambonID int32 `json:"tambon_id"`
 }
 
 type Province struct {
